@@ -335,24 +335,6 @@
             .flow-step { flex-direction: column; text-align: center; align-items: center; padding: 25px 15px; }
             .flow-num { margin-right: 0; margin-bottom: 15px; }
         }
-
-        /* --- Packages Section --- */
-        .ykct-packages { padding: 120px 20px; background: linear-gradient(180deg, var(--light-bg) 0%, #FFFFFF 100%); }
-        .packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; align-items: stretch; }
-        .pkg-card { background: #FFF; border-radius: 20px; padding: 40px 30px; border: 2px solid #EEE; position: relative; display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s; }
-        .pkg-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-        .pkg-card.popular { border-color: var(--tropical-orange); box-shadow: 0 15px 30px rgba(255,107,0,0.15); }
-        .pkg-card.premium { border-color: var(--neon-pink); background: linear-gradient(180deg, #FFF 0%, rgba(255,0,127,0.03) 100%); }
-        .pkg-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--tropical-orange); color: #FFF; font-weight: 900; padding: 5px 20px; border-radius: 20px; font-size: 0.9rem; letter-spacing: 1px; white-space: nowrap; }
-        .pkg-badge.premium-badge { background: var(--neon-pink); }
-        .pkg-title { font-size: 1.6rem; font-weight: 900; text-align: center; margin-bottom: 10px; color: var(--text-main); }
-        .pkg-target { font-size: 0.95rem; color: var(--text-light); text-align: center; margin-bottom: 25px; min-height: 45px; font-weight: 700;}
-        .pkg-price { text-align: center; font-size: 2.5rem; font-family: 'Oswald'; font-weight: 900; color: var(--neon-turquoise); margin-bottom: 30px; line-height: 1; }
-        .pkg-price span { font-size: 1rem; color: var(--text-light); font-family: 'Noto Sans JP'; }
-        .pkg-features { list-style: none; padding: 0; margin: 0 0 30px 0; flex-grow: 1; }
-        .pkg-features li { padding-left: 30px; position: relative; margin-bottom: 15px; font-size: 0.95rem; font-weight: 700; line-height: 1.5; }
-        .pkg-features li::before { content: '✅'; position: absolute; left: 0; top: 0px; font-size: 1.1rem; }
-        .pkg-features li.strong { color: var(--neon-pink); }
     </style>
 
     <!-- 1. HERO SLIDER -->
@@ -362,8 +344,8 @@
         <div class="slide slide-bg-1 active">
             
             <div class="slide-content">
-                <h2 class="slide-title" style="font-size: clamp(1.8rem, 3.5vw, 3.5rem);">テニスノート1冊で、子どもの<br><span style="color:var(--neon-turquoise);">自立心</span>と<span style="color:var(--neon-turquoise);">課題解決力</span>が覚醒する。</h2>
-                <p class="slide-subtitle">沖縄発・完全習慣型テニスサポート塾 YKCT</p>
+                <h2 class="slide-title">見えなかった未来を、<br>見える未来へ。</h2>
+                <p class="slide-subtitle">沖縄から、テニスの常識と教育の壁を壊す</p>
                 <a href="https://lin.ee/9ZHTgAM" class="ykct-btn"><span>公式LINEで詳細を見る</span></a>
             </div>
         </div>
@@ -380,18 +362,18 @@
         </div>
     </div>
 
-    <!-- 2. AGITATION (課題提示・保護者向け) -->
+    <!-- 2. AGITATION (課題提示) -->
     <div class="ykct-agitation">
         <div class="agitation-box">
-            <h2 style="font-size: clamp(1.5rem, 4vw, 2.2rem);">保護者の皆様、こんな悩みを抱えていませんか？</h2>
+            <h2>こんな悩みを抱えていませんか？</h2>
             <div class="agitation-list">
-                <div class="agitation-bubble">言われないと練習に行かない、準備もしない</div>
-                <div class="agitation-bubble">試合で負けても悔しそうじゃない、本気度が見えない</div>
-                <div class="agitation-bubble">「ただ球を打っているだけ」で頭を使っているように見えない</div>
-                <div class="agitation-bubble">テニスの結果以上に、挨拶や礼儀ができていない</div>
-                <div class="agitation-bubble">このままテニスを続けて、将来（進学や社会）の役に立つのか不安…</div>
+                <div class="agitation-bubble">練習では打てるのに、試合になると勝てない</div>
+                <div class="agitation-bubble">「いつ・なぜ・どのショットを打つべきか」が分からない</div>
+                <div class="agitation-bubble">全国レベルの基準や進路の道筋が見えていない</div>
+                <div class="agitation-bubble">言われたことはやるが、自分で考えて動けない</div>
+                <div class="agitation-bubble">テニスだけでなく、人間的な成長もしてほしい</div>
             </div>
-            <p style="margin-top: 40px; font-weight: 900; color: var(--neon-pink); font-size: 1.4rem;">お子様を変えるには、単なる「打ち方の指導」では不十分です。</p>
+            <p style="margin-top: 40px; font-weight: 900; color: var(--neon-pink); font-size: 1.3rem;">その悩み、単なる「打ち方の指導」では解決しません。</p>
         </div>
     </div>
 
@@ -528,60 +510,6 @@
                     <h3>実行・振り返り・自立へ</h3>
                     <p>目的のない練習は一切行いません。「なぜミスしたか」「次はどうするか」を自ら考えさせ、最終的にコーチの指示なしで動ける自立した人間へ導きます。</p>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 6.3 PACKAGES (料金体系・提供プラン) -->
-    <div class="ykct-packages">
-        <h2 class="section-title">SERVICE <span class="text-accent-orange">PACKAGES</span></h2>
-        <div class="section-subtitle">本気で変わるための3つのステップ</div>
-        
-        <div class="packages-grid">
-            <!-- Light -->
-            <div class="pkg-card">
-                <div class="pkg-title">ライトプラン</div>
-                <div class="pkg-target">遠方の選手・他スクールメインで<br>「YKCTの思考法」を取り入れたい方へ</div>
-                <div class="pkg-price">¥5,000<span> / 月</span></div>
-                <ul class="pkg-features">
-                    <li>YKCTオリジナル「テニスノート」提供</li>
-                    <li>週1回の全体フィードバック・講話動画配信</li>
-                    <li>月1回のオンライングループミーティング</li>
-                    <li>保護者向けの情報共有コミュニティ参加権</li>
-                </ul>
-                <a href="https://lin.ee/9ZHTgAM" class="ykct-btn" style="padding: 15px; font-size: 1rem; width: 100%;">プランの相談をする</a>
-            </div>
-
-            <!-- Standard -->
-            <div class="pkg-card popular">
-                <div class="pkg-badge">🔥 当塾の主力・圧倒的1番人気</div>
-                <div class="pkg-title">スタンダードプラン</div>
-                <div class="pkg-target">テニスを通じて自立心と課題解決力を<br>確実に身につけさせたい保護者様へ</div>
-                <div class="pkg-price" style="color: var(--tropical-orange);">¥20,000<span> / 月</span></div>
-                <ul class="pkg-features">
-                    <li>ライトプランの全内容</li>
-                    <li class="strong">毎日のノート提出とコーチからの個別フィードバック（週2〜3回）</li>
-                    <li class="strong">月1回の1on1オンラインメンタリング（保護者同席可能）</li>
-                    <li>目標設定（マンダラート等）の作成と進捗管理</li>
-                    <li>YKCTオフライン練習会への優先参加権</li>
-                </ul>
-                <a href="https://lin.ee/9ZHTgAM" class="ykct-btn" style="padding: 15px; font-size: 1rem; width: 100%;">まずは体験に申し込む</a>
-            </div>
-
-            <!-- Premium -->
-            <div class="pkg-card premium">
-                <div class="pkg-badge premium-badge">💎 枠数限定・完全コミット</div>
-                <div class="pkg-title">プレミアムプラン</div>
-                <div class="pkg-target">全国を目指す、あるいは本気で<br>人生のターニングポイントを作りたい方へ</div>
-                <div class="pkg-price" style="color: var(--neon-pink);">¥60,000<span> / 月</span></div>
-                <ul class="pkg-features">
-                    <li>スタンダードプランの全内容</li>
-                    <li class="strong">無制限のLINE相談（技術・メンタル・進路相談など）</li>
-                    <li class="strong">月2回のディープメンタリング（目標達成プロセスの完全修正）</li>
-                    <li>大会時の動画分析・戦術フィードバック</li>
-                    <li>保護者様向けの特別カウンセリング</li>
-                </ul>
-                <a href="https://lin.ee/9ZHTgAM" class="ykct-btn" style="padding: 15px; font-size: 1rem; width: 100%; background: linear-gradient(90deg, #111, #333);">空き枠を確認する</a>
             </div>
         </div>
     </div>
@@ -883,8 +811,8 @@
     <!-- 9. FINAL CTA -->
     <div class="final-cta">
         <div class="final-cta-box">
-            <h2>お子様の未来を変える準備はできましたか？</h2>
-            <p style="color: #FFF; font-size: 1.2rem; margin-bottom: 40px; font-weight: 700; line-height: 1.8;">※コーチが一人ひとりと本気で向き合うため、<strong style="color: var(--tropical-yellow); font-size: 1.4rem;">各プランには毎月の受け入れ人数に限り</strong>があります。<br>定員に達する前に、まずは公式LINEから「無料体験・ご相談」をお申し込みください。</p>
+            <h2>READY TO CHANGE?</h2>
+            <p>日常を塗り替える熱狂が、ここで待っています。<br>まずは公式LINEを追加し、あなたの目標を聞かせてください。</p>
             <a href="https://lin.ee/9ZHTgAM" class="ykct-btn">公式LINEで今すぐ相談する</a>
         </div>
     </div>
