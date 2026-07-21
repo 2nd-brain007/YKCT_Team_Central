@@ -1,0 +1,823 @@
+<div id="ykct-modern-wrapper">
+    <style>
+        /* =========================================================================
+           YKCT MODERN THEME: BRIGHT TROPICAL LP (Landing Page) EDITION
+           ========================================================================= */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@700&display=swap');
+
+        #ykct-modern-wrapper {
+            /* Bright Tropical Colors */
+            --neon-pink: #FF007F;
+            --neon-turquoise: #00D4FF;
+            --tropical-orange: #FF6B00;
+            --tropical-yellow: #FFD500;
+            --light-bg: #F4FBFC;
+            --white-bg: #FFFFFF;
+            --text-main: #1E293B;
+            --text-light: #475569;
+            
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            color: var(--text-main);
+            background: var(--white-bg);
+            width: 100vw;
+            position: relative;
+            left: calc(-50vw + 50%);
+            overflow-x: hidden;
+            line-height: 1.6;
+            margin-top: -50px;
+        }
+
+        #ykct-modern-wrapper h1, #ykct-modern-wrapper h2, #ykct-modern-wrapper h3, #ykct-modern-wrapper h4 {
+            font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+            margin: 0; padding: 0; line-height: 1.3;
+            color: var(--text-main);
+        }
+
+        #ykct-modern-wrapper p { margin: 0 0 1rem 0; color: var(--text-light); font-size: 1.1rem; }
+        #ykct-modern-wrapper img { max-width: 100%; height: auto; border-radius: 12px; }
+
+        /* --- UI Components --- */
+        .ykct-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: linear-gradient(90deg, var(--neon-pink), var(--tropical-orange));
+            color: #FFF !important; font-size: 1.3rem; font-weight: 900;
+            padding: 20px 50px; border-radius: 50px; text-decoration: none;
+            letter-spacing: 1px; box-shadow: 0 10px 25px rgba(255,0,127,0.3);
+            transition: all 0.3s ease; 
+        }
+        .ykct-btn:hover {
+            transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,107,0,0.4);
+            background: linear-gradient(90deg, var(--tropical-orange), var(--tropical-yellow));
+        }
+
+        /* 爽やかアクセントカラークラス */
+        .text-accent-blue { color: var(--neon-turquoise); }
+        .text-accent-pink { color: var(--neon-pink); }
+        .text-accent-orange { color: var(--tropical-orange); }
+        
+        .section-title { 
+            font-size: clamp(2.5rem, 5vw, 3.5rem); text-align: center; margin-bottom: 30px; 
+            text-transform: uppercase; font-weight: 900; letter-spacing: -1px; 
+            line-height: 1.2;
+        }
+        .section-subtitle {
+            text-align: center; color: var(--neon-pink); font-weight: 900; 
+            font-size: 1.2rem; margin-bottom: 60px; letter-spacing: 2px;
+        }
+
+        /* --- Section 1: Hero Slider --- */
+        .ykct-hero-slider {
+            position: relative; width: 100%; height: 95vh; min-height: 650px;
+            overflow: hidden; clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            z-index: 1; margin-bottom: -50px;
+        }
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transition: opacity 1.5s ease-in-out;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1;
+        }
+        .slide.active { opacity: 1; z-index: 2; }
+        
+        /* Pre-styled background classes */
+        .slide-bg-1 { background: url('https://www.ykct-tennis.com/wp-content/uploads/2022/06/IMG_1812-scaled.jpg') center/cover no-repeat; }
+        .slide-bg-2 { background: url('https://www.ykct-tennis.com/wp-content/uploads/2021/09/sports_tennis_racket_ball.png') center/cover no-repeat; }
+        .slide-bg-3 { background: linear-gradient(135deg, var(--tropical-orange) 0%, var(--tropical-yellow) 100%); }
+        
+        .slide::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(0, 30, 60, 0.6) 0%, rgba(255, 0, 127, 0.4) 100%);
+            z-index: -1;
+        }
+        .slide-content {
+            text-align: center; padding: 50px 40px; z-index: 2;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
+            border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); max-width: 90%;
+            transform: translateY(30px); transition: all 1s ease 0.5s; opacity: 0;
+        }
+        .slide.active .slide-content { transform: translateY(0); opacity: 1; }
+        
+        .slide-title {
+            font-size: clamp(2rem, 4vw, 4rem); margin-bottom: 20px; font-weight: 900;
+            background: linear-gradient(90deg, var(--tropical-orange), var(--neon-pink));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+        .slide-subtitle { font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 700; color: var(--text-main); margin-bottom: 40px; line-height: 1.5; }
+        
+        /* Slider Controls */
+        .slider-controls {
+            position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 15px; z-index: 10;
+        }
+        .slider-dot {
+            width: 40px; height: 6px; background: rgba(255,255,255,0.4); border-radius: 5px;
+            cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .slider-dot.active { background: #FFF; width: 60px; box-shadow: 0 0 10px rgba(255,255,255,0.8); }
+
+        /* --- Section 2: Problem/Agitation (LP Style) --- */
+        .ykct-agitation { background: var(--light-bg); padding: 100px 20px; text-align: center; }
+        .agitation-box {
+            background: #FFF; border-radius: 20px; max-width: 800px; margin: 0 auto; padding: 50px;
+            box-shadow: 0 20px 40px rgba(0,212,255,0.1); border-top: 5px solid var(--neon-pink);
+            position: relative;
+        }
+        .agitation-box h2 { font-size: 2rem; color: var(--text-main); margin-bottom: 30px; }
+        .agitation-list { display: flex; flex-direction: column; gap: 15px; text-align: left; margin: 0 auto; max-width: 600px; font-weight: 700; }
+        .agitation-bubble { 
+            background: var(--light-bg); padding: 15px 25px; border-radius: 20px; 
+            position: relative; color: var(--text-main); font-size: 1.1rem; 
+            border-left: 5px solid var(--neon-turquoise); display: flex; align-items: center; 
+        }
+        .agitation-bubble::before { content: '🤔'; font-size: 1.5rem; margin-right: 15px; }
+
+
+        /* --- Section 3: Concept Statement --- */
+        .ykct-concept { padding: 120px 20px; max-width: 1000px; margin: 0 auto; text-align: center; }
+        .ykct-concept h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.4; margin-bottom: 40px; }
+        .ykct-concept p { font-size: 1.2rem; text-align: left; display: inline-block; max-width: 800px; }
+
+        /* --- Section 4: 4 Core Values --- */
+        .ykct-values { background: linear-gradient(180deg, #FFFFFF 0%, var(--light-bg) 100%); padding: 100px 20px; }
+        .value-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
+        .value-card { background: #FFF; border-radius: 15px; padding: 50px 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s;}
+        .value-card:hover { transform: translateY(-10px); }
+        .value-card-num { font-size: 4rem; font-family: 'Oswald'; color: var(--neon-turquoise); opacity: 0.2; margin-bottom: -30px; }
+        .value-card h3 { font-size: 1.6rem; margin-bottom: 20px; }
+
+        /* --- Section 5: Middle CTA --- */
+        .middle-cta { background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(135deg, var(--neon-turquoise) 0%, var(--neon-pink) 100%); padding: 80px 20px; text-align: center; color: #FFF; }
+        .middle-cta h2 { color: #FFF; font-size: 2.5rem; margin-bottom: 20px; }
+
+        /* --- Section 6: The Method (8 Steps) --- */
+        .ykct-method { padding: 120px 20px; max-width: 1000px; margin: 0 auto; }
+        .method-container { background: #FFF; border-radius: 20px; padding: 50px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); border: 2px solid var(--light-bg); }
+        .method-step { display: flex; align-items: flex-start; margin-bottom: 40px; }
+        .method-step:last-child { margin-bottom: 0; }
+        .method-num { 
+            background: var(--tropical-orange); color: #FFF; width: 60px; height: 60px; 
+            border-radius: 50%; display: flex; justify-content: center; align-items: center; 
+            font-size: 2rem; font-weight: 900; margin-right: 30px; flex-shrink: 0; box-shadow: 0 10px 20px rgba(255,107,0,0.3);
+        }
+        .method-content h3 { font-size: 1.5rem; color: var(--neon-pink); margin-bottom: 10px; }
+
+        /* --- Section 7: Origin & Coaches --- */
+        .ykct-coaches { background: var(--light-bg); padding: 120px 20px; }
+        .origin-box { display: flex; flex-wrap: wrap; gap: 50px; max-width: 1000px; margin: 0 auto; align-items: center; background: #FFF; padding: 50px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.05);}
+        .origin-image { flex: 1; min-width: 300px; }
+        .origin-image img { border-radius: 12px; box-shadow: -15px 15px 0 var(--tropical-yellow); }
+        .origin-text { flex: 2; min-width: 300px; }
+        
+        .coach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1000px; margin: 60px auto 0 auto; }
+        .coach-card { background: #FFF; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        .coach-img { width: 100%; height: 350px; object-fit: cover; }
+        .coach-info { padding: 30px; }
+        .coach-role { background: rgba(0,212,255,0.1); color: var(--neon-turquoise); padding: 5px 15px; border-radius: 20px; font-weight: 900; font-size: 0.9rem; display: inline-block; margin-bottom: 15px;}
+
+        /* --- Section 8: FAQ --- */
+        .ykct-faq { padding: 120px 20px; max-width: 800px; margin: 0 auto; }
+        .faq-item { background: #FFF; padding: 30px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border-left: 5px solid var(--neon-turquoise); }
+        .faq-q { font-weight: 900; font-size: 1.2rem; display: flex; align-items: flex-start; margin-bottom: 15px; }
+        .faq-q::before { content: 'Q.'; color: var(--tropical-orange); font-family: 'Oswald'; font-size: 1.8rem; margin-right: 15px; line-height: 1; }
+        .faq-a { display: flex; align-items: flex-start; color: var(--text-light); }
+        .faq-a::before { content: 'A.'; color: var(--neon-turquoise); font-family: 'Oswald'; font-size: 1.8rem; margin-right: 15px; line-height: 1; font-weight: 900;}
+
+        /* --- Voice Section --- */
+        .ykct-voice { background: var(--white-bg); padding: 120px 20px; }
+        .voice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
+        .voice-card { background: var(--light-bg); padding: 40px 30px; border-radius: 20px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .voice-card::before { content: '”'; position: absolute; top: -10px; right: 20px; font-size: 6rem; font-family: 'Oswald'; color: rgba(0,212,255,0.1); line-height: 1; }
+        .voice-icon { font-size: 3rem; margin-bottom: 20px; }
+        .voice-card h4 { color: var(--neon-pink); font-size: 1.2rem; margin-bottom: 15px; }
+        .voice-card p { color: var(--text-main); font-size: 0.95rem; font-weight: 700; line-height: 1.6; }
+
+        /* --- Trial Flow Section --- */
+        .ykct-trial-flow { background: linear-gradient(135deg, rgba(255,107,0,0.05) 0%, rgba(255,0,127,0.05) 100%); padding: 120px 20px; color: var(--text-main); position: relative; overflow: hidden; }
+        .ykct-trial-flow::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, transparent 60%); z-index: 1; }
+        .ykct-trial-flow .section-title { color: var(--text-main); position: relative; z-index: 2; }
+        .ykct-trial-flow .section-subtitle { color: var(--neon-pink); position: relative; z-index: 2; }
+        .flow-container { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+        .flow-step { display: flex; align-items: flex-start; margin-bottom: 30px; background: #FFF; padding: 30px; border-radius: 15px; border-left: 4px solid var(--neon-turquoise); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .flow-num { font-size: 2.5rem; font-family: 'Oswald'; font-weight: 900; color: var(--tropical-orange); margin-right: 30px; line-height: 1; min-width: 60px;}
+        .flow-step h4 { font-size: 1.4rem; color: var(--text-main); margin-bottom: 10px; font-weight: 900;}
+        .flow-step p { color: var(--text-light); margin: 0; font-size: 1rem; font-weight: 700; line-height: 1.5; }
+
+        /* --- Timetable Section --- */
+        .ykct-timetable { background: var(--white-bg); padding: 120px 20px; }
+        .timetable-container { max-width: 900px; margin: 0 auto; background: #FFF; border-radius: 20px; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); border: 2px solid var(--light-bg); }
+        .timetable-group { margin-bottom: 40px; }
+        .timetable-group:last-child { margin-bottom: 0; }
+        .timetable-header { 
+            background: linear-gradient(90deg, var(--neon-turquoise), var(--neon-pink)); 
+            color: #FFF; font-size: 1.5rem; font-weight: 900; padding: 15px 30px; 
+            border-radius: 12px 12px 0 0; display: flex; align-items: center; 
+        }
+        .timetable-header .num { font-family: 'Oswald'; font-size: 2.5rem; margin-right: 20px; color: var(--tropical-yellow); line-height: 1;}
+        .timetable-table { width: 100%; border-collapse: collapse; text-align: center; font-weight: 700; font-size: 1.1rem; }
+        .timetable-table th { background: rgba(0,212,255,0.05); color: var(--text-light); padding: 15px; border: 1px solid #EEE; width: 30%; }
+        .timetable-table td { padding: 15px; border: 1px solid #EEE; color: var(--text-main); }
+        .timetable-table tr:nth-child(even) td { background: #FAFAFA; }
+        .text-holiday { color: var(--neon-pink); }
+
+        /* --- Section 9: Final CTA --- */
+        .final-cta { padding: 100px 20px; text-align: center; background: #FFF; }
+        .final-cta-box { background: linear-gradient(135deg, var(--tropical-yellow) 0%, var(--tropical-orange) 50%, var(--neon-pink) 100%); border-radius: 30px; padding: 80px 40px; max-width: 1000px; margin: 0 auto; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(255,107,0,0.5); }
+        .final-cta-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%); z-index: 1; pointer-events: none;}
+        .final-cta-box h2 { color: #FFF; font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; position: relative; z-index: 2; text-shadow: 0 4px 15px rgba(255, 0, 127, 0.5), 0 0 40px rgba(255, 213, 0, 0.5); font-weight: 900; letter-spacing: 2px; }
+        .final-cta-box p { color: #FFF; font-size: 1.2rem; margin-bottom: 40px; position: relative; z-index: 2; font-weight: 700; text-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .final-cta-box .ykct-btn { background: #FFF; color: var(--neon-pink) !important; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .final-cta-box .ykct-btn:hover { background: var(--tropical-yellow); color: #FFF !important; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+
+        /* Coach Achievements List */
+        .coach-achievements { list-style: none; padding: 0; margin: 10px 0 15px 0; font-size: 0.85rem; color: var(--text-light); }
+        .coach-achievements li { position: relative; padding-left: 15px; margin-bottom: 5px; line-height: 1.4; }
+        .coach-achievements li::before { content: '🏆'; position: absolute; left: 0; top: 0px; font-size: 0.7rem; }
+
+        /* --- Gallery Section --- */
+        .ykct-gallery { padding: 120px 20px; text-align: center; background: #FFF; }
+        .gallery-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; 
+            max-width: 1200px; margin: 0 auto; 
+        }
+        .gallery-item { 
+            height: 250px; border-radius: 15px; overflow: hidden; position: relative; 
+            background-size: cover; background-position: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+        }
+        .gallery-overlay { 
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; 
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); 
+            color: #FFF; font-weight: 700; font-size: 1.1rem; text-align: left; 
+        }
+
+        /* --- Access Section --- */
+        .ykct-access { padding: 120px 20px; background: var(--light-bg); }
+        .access-container { 
+            max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 40px; 
+            background: #FFF; padding: 40px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); 
+        }
+        .access-info { flex: 1; min-width: 300px; }
+        .access-info h3 { color: var(--text-main); font-size: 1.5rem; margin-bottom: 20px; border-bottom: 2px solid var(--tropical-yellow); padding-bottom: 10px; display: inline-block; }
+        .access-table { width: 100%; border-collapse: collapse; text-align: left; margin-bottom: 30px; }
+        .access-table th { padding: 15px 0; border-bottom: 1px solid #EEE; color: var(--text-light); width: 30%; font-weight: 700; }
+        .access-table td { padding: 15px 0; border-bottom: 1px solid #EEE; color: var(--text-main); font-weight: 700; }
+
+        /* --- Numbers Section --- */
+        .ykct-numbers { padding: 80px 20px; background: linear-gradient(135deg, var(--neon-turquoise) 0%, #009EF3 100%); color: #FFF; text-align: center; }
+        .numbers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
+        .number-box { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); }
+        .number-box .num { font-size: 4rem; font-family: 'Oswald'; font-weight: 900; line-height: 1; color: var(--tropical-yellow); margin-bottom: 10px; text-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .number-box .unit { font-size: 1.5rem; }
+        .number-box .desc { font-size: 1.1rem; font-weight: 700; margin-top: 10px; line-height: 1.5; }
+
+        /* --- Target Section (Who is this for) --- */
+        .ykct-target { padding: 100px 20px; background: #FFF; text-align: center; }
+        .target-box { max-width: 800px; margin: 0 auto; border: 4px solid var(--neon-turquoise); border-radius: 20px; padding: 50px 30px; background: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1.5" fill="%2300d4ff" opacity="0.2"/></svg>'); }
+        .target-list { list-style: none; padding: 0; margin: 0; text-align: left; display: inline-block; font-size: 1.15rem; font-weight: 700; color: var(--text-main); }
+        .target-list li { margin-bottom: 20px; padding-left: 40px; position: relative; line-height: 1.5; }
+        .target-list li::before { content: '🔥'; position: absolute; left: 0; top: 0px; font-size: 1.5rem; }
+
+        /* --- Alumni Section --- */
+        .ykct-alumni { padding: 80px 20px; background: #FFF; text-align: center; }
+        .alumni-container { max-width: 900px; margin: 0 auto; background: var(--light-bg); border-radius: 20px; padding: 40px; }
+        .alumni-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px; }
+        .alumni-badge { background: #FFF; padding: 10px 20px; border-radius: 30px; font-weight: 700; color: var(--text-main); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #EEE; }
+
+        /* --- Special Offer Badge --- */
+        .offer-badge { background: var(--neon-pink); color: #FFF; padding: 25px 30px; border-radius: 15px; max-width: 600px; margin: 40px auto 0; font-weight: 900; box-shadow: 0 10px 30px rgba(255,0,127,0.3); border: 2px dashed rgba(255,255,255,0.5); position: relative; overflow: hidden; text-align: center; }
+        .offer-badge::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent); transform: rotate(45deg); animation: shine 3s infinite; }
+        @keyframes shine { 0% { left: -100%; } 20% { left: 100%; } 100% { left: 100%; } }
+
+        @media (max-width: 768px) {
+            .value-grid { grid-template-columns: 1fr; }
+            .coach-grid { grid-template-columns: 1fr; }
+            .agitation-box { padding: 30px; }
+            .origin-box { padding: 30px; }
+            .method-container { padding: 30px; }
+            .method-step { flex-direction: column; }
+            .method-num { margin-bottom: 20px; }
+        }
+    </style>
+
+    <!-- 1. HERO SLIDER -->
+    <div class="ykct-hero-slider" id="heroSlider">
+        
+        <!-- Slide 1: Brand -->
+        <div class="slide slide-bg-1 active">
+            
+            <div class="slide-content">
+                <h2 class="slide-title">見えなかった未来を、<br>見える未来へ。</h2>
+                <p class="slide-subtitle">沖縄から、テニスの常識と教育の壁を壊す</p>
+                <a href="https://lin.ee/9ZHTgAM" class="ykct-btn"><span>公式LINEで詳細を見る</span></a>
+            </div>
+        </div>
+        
+        <!-- Slide 2: Beginners -->
+
+        
+        <!-- Slide 3: Philosophy -->
+
+        
+        <!-- Controls -->
+        <div class="slider-controls">
+            <div class="slider-dot active" onclick="goToSlide(0)"></div>
+        </div>
+    </div>
+
+    <!-- 2. AGITATION (課題提示) -->
+    <div class="ykct-agitation">
+        <div class="agitation-box">
+            <h2>こんな悩みを抱えていませんか？</h2>
+            <div class="agitation-list">
+                <div class="agitation-bubble">練習では打てるのに、試合になると勝てない</div>
+                <div class="agitation-bubble">「いつ・なぜ・どのショットを打つべきか」が分からない</div>
+                <div class="agitation-bubble">全国レベルの基準や進路の道筋が見えていない</div>
+                <div class="agitation-bubble">言われたことはやるが、自分で考えて動けない</div>
+                <div class="agitation-bubble">テニスだけでなく、人間的な成長もしてほしい</div>
+            </div>
+            <p style="margin-top: 40px; font-weight: 900; color: var(--neon-pink); font-size: 1.3rem;">その悩み、単なる「打ち方の指導」では解決しません。</p>
+        </div>
+    </div>
+
+    <!-- 3. CONCEPT -->
+    <div class="ykct-concept">
+        <div class="section-subtitle">OUR CONCEPT</div>
+        <h2>テニスを教えるのではない。<br><span class="text-accent-blue">自分で未来を切り拓く力</span>を育てる。</h2>
+        <p>
+            YKCTの最終的な目標は、単なる強豪テニスクラブになることではありません。<br><br>
+            沖縄の子どもたちが、沖縄にいることを理由に可能性や選択肢を狭めることなく、県・九州・全国・世界を具体的にイメージできる育成環境をつくることです。<br><br>
+            プロや世界を目指すことだけが正解ではありません。初勝利、県大会出場、自信をつけること。目標の大きさではなく、「本人が望む未来に向かって前進できているか」を私たちは最も重視します。
+        </p>
+    </div>
+
+    <!-- 3.5 NUMBERS (数字で見るYKCT) -->
+    <div class="ykct-numbers">
+        <div class="numbers-grid">
+            <div class="number-box">
+                <div class="num">17<span class="unit">名</span></div>
+                <div class="desc">九州大会出場者数<br>（沖縄県過去最多）</div>
+            </div>
+            <div class="number-box">
+                <div class="num">16<span class="unit">年</span></div>
+                <div class="desc">代表の指導歴<br>確かな実績とノウハウ</div>
+            </div>
+            <div class="number-box">
+                <div class="num">0<span class="unit">から</span></div>
+                <div class="desc">初心者から全国へ<br>育成一筋のカリキュラム</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3.7 ALUMNI (卒業生・進路実績) -->
+    <div class="ykct-alumni">
+        <h2 class="section-title">CAREER <span class="text-accent-blue">PATH</span></h2>
+        <div class="section-subtitle">卒業後の進路実績（一例）</div>
+        
+        <div class="alumni-container">
+            <p style="font-weight: 700; color: var(--text-main); margin-bottom: 20px;">YKCTで培った「考える力」を武器に、多くの卒業生が強豪校へ進学・活躍しています。</p>
+            <div class="alumni-list">
+                <div class="alumni-badge">🎓 琉球大学（10名以上）</div>
+                <div class="alumni-badge">🎓 沖縄国際大学</div>
+                <div class="alumni-badge">🎓 沖縄大学</div>
+                <div class="alumni-badge">🎓 名桜大学</div>
+                <div class="alumni-badge">🎓 県内各種 専門学校</div>
+                <div class="alumni-badge">✈️ 関東・九州エリアの大学（テニス進学）</div>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 20px;">※上記は過去の実績の一部です</p>
+        </div>
+    </div>
+
+    <!-- 4. 4 CORE VALUES -->
+    <div class="ykct-values">
+        <h2 class="section-title"><span class="text-accent-orange">CORE</span> VALUES</h2>
+        <div class="section-subtitle">YKCTが約束する4つの哲学</div>
+        
+        <div class="value-grid">
+            <div class="value-card">
+                <div class="value-card-num">01</div>
+                <h3>プレイヤー・センタード</h3>
+                <p>選手の希望を何でも聞く「選手ファースト」ではありません。選手の現在地と将来の可能性を中心に置き、「この選手の成長にとって何が最善か」を基準に厳しくも誠実に向き合います。</p>
+            </div>
+            <div class="value-card">
+                <div class="value-card-num">02</div>
+                <h3>コーチングの徹底</h3>
+                <p>一方的に正解を与え続ける指導はしません。問いかけ、選択肢を示し、選手自身に気づかせます。自分で考え、決断し、修正できる自立した人材を目指します。</p>
+            </div>
+            <div class="value-card">
+                <div class="value-card-num">03</div>
+                <h3>過程の質を評価する</h3>
+                <p>勝敗という結果だけでなく、「目的を理解して取り組めたか」「自分で考えたか」「苦しい状況に向き合えたか」という過程こそが重要な成長です。</p>
+            </div>
+            <div class="value-card">
+                <div class="value-card-num">04</div>
+                <h3>礼儀は未来への投資</h3>
+                <p>挨拶、感謝、礼儀は「現代だからこそ価値が高まる人生のスキル」です。見返りを求めず徳を積み、周囲から応援され、信頼される人間力を育てます。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. MIDDLE CTA -->
+    <div class="middle-cta">
+        <h2>YOUR FUTURE STARTS HERE.</h2>
+        <p style="color: #FFF; font-weight: 700; margin-bottom: 30px;">まずは一度、YKCTの環境と熱量を体感してください。</p>
+        <a href="https://lin.ee/9ZHTgAM" class="ykct-btn" style="background: #FFF; color: var(--neon-pink) !important;">公式LINEから体験を予約する</a>
+    </div>
+
+    <!-- 4.5 TARGET (こんなジュニアを待っています) -->
+    <div class="ykct-target">
+        <h2 class="section-title">WHO IS THIS <span class="text-accent-pink">FOR?</span></h2>
+        <div class="section-subtitle">YKCTが全力でサポートしたい選手</div>
+        
+        <div class="target-box">
+            <h3 style="font-size: 1.5rem; margin-bottom: 30px; color: var(--neon-turquoise);">初心者から経験者まで、こんなジュニア大歓迎！</h3>
+            <ul class="target-list">
+                <li><span style="color: var(--neon-pink); font-weight: 900;">【初心者🔰】</span>ラケットを握ったことがないけど、新しく挑戦してみたい！</li>
+                <li><span style="color: var(--tropical-orange); font-weight: 900;">【経験者🎾】</span>今の自分を変えて、本気で県大会・九州大会を目指したい！</li>
+                <li>「ただ打つだけ」のテニスから卒業して、頭を使ったテニスがしたい！</li>
+                <li>テニスを通じて、自分で考え行動できる人間に成長したい！</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 6. THE METHOD -->
+    <div class="ykct-method">
+        <h2 class="section-title">THE YKCT <span class="text-accent-pink">METHOD</span></h2>
+        <div class="section-subtitle">完全習慣型・自立へのステップ</div>
+        
+        <div class="method-container">
+            <div class="method-step">
+                <div class="method-num">1</div>
+                <div class="method-content">
+                    <h3>見せる ＆ イメージさせる</h3>
+                    <p>人は、見たことも想像したこともない場所へは進めません。選手が知らない舞台や競技基準を示し、その舞台に立つ自分の姿を具体的に想像させます。</p>
+                </div>
+            </div>
+            <div class="method-step">
+                <div class="method-num">2</div>
+                <div class="method-content">
+                    <h3>言葉にさせる ＆ 現在地を知る</h3>
+                    <p>コーチが目標を決めるのではなく、本人の言葉として表現させます。そして、今の自分の立ち位置（技術・体力・メンタル）を客観的に確認します。</p>
+                </div>
+            </div>
+            <div class="method-step">
+                <div class="method-num">3</div>
+                <div class="method-content">
+                    <h3>道筋を示し、行動へ落とし込む</h3>
+                    <p>大きな夢と現在地の間にあるロードマップを整理し、「だから今日、この練習が必要なんだ」という納得感を持って日々の行動へつなげます。</p>
+                </div>
+            </div>
+            <div class="method-step">
+                <div class="method-num">4</div>
+                <div class="method-content">
+                    <h3>実行・振り返り・自立へ</h3>
+                    <p>目的のない練習は一切行いません。「なぜミスしたか」「次はどうするか」を自ら考えさせ、最終的にコーチの指示なしで動ける自立した人間へ導きます。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6.5 TIMETABLE -->
+    <div class="ykct-timetable">
+        <h2 class="section-title"><span class="text-accent-blue">CLASS</span> SCHEDULE</h2>
+        <div class="section-subtitle">ひと目でわかるレッスン時間案内（中部校）</div>
+        
+        <div class="timetable-container">
+            <!-- Group 1 -->
+            <div class="timetable-group">
+                <div class="timetable-header">
+                    <span class="num">1</span> Team Central クラス
+                </div>
+                <table class="timetable-table">
+                    <tr><th>曜日</th><th>レッスン時間</th></tr>
+                    <tr><td>月</td><td>17:00 - 18:30</td></tr>
+                    <tr><td>火</td><td class="text-holiday">休み</td></tr>
+                    <tr><td>水</td><td>18:00 - 19:30</td></tr>
+                    <tr><td>木</td><td>17:00 - 18:30</td></tr>
+                    <tr><td>金</td><td>18:00 - 19:30</td></tr>
+                    <tr><td>土</td><td>17:00 - 18:30</td></tr>
+                    <tr><td>日</td><td>17:00 - 18:30</td></tr>
+                </table>
+            </div>
+
+            <!-- Group 2 -->
+            <div class="timetable-group">
+                <div class="timetable-header" style="background: linear-gradient(90deg, var(--tropical-orange), var(--neon-pink));">
+                    <span class="num" style="color: #FFF;">2</span> 育成クラス
+                </div>
+                <table class="timetable-table">
+                    <tr><th>曜日</th><th>レッスン時間</th></tr>
+                    <tr><td>月</td><td>18:00 - 20:00</td></tr>
+                    <tr><td>火</td><td class="text-holiday">休み</td></tr>
+                    <tr><td>水</td><td>18:00 - 21:00</td></tr>
+                    <tr><td>木</td><td>17:00 - 21:00</td></tr>
+                    <tr><td>金</td><td>18:00 - 21:00</td></tr>
+                    <tr><td>土</td><td>17:00 - 21:00</td></tr>
+                    <tr><td>日</td><td>18:00 - 20:00</td></tr>
+                </table>
+            </div>
+            
+            <p style="text-align: center; margin-top: 30px; font-weight: 700; color: var(--text-light);">※会場・詳細はお気軽にお問い合わせください</p>
+        </div>
+    </div>
+
+    <!-- 7. ORIGIN & COACHES -->
+    <div class="ykct-coaches">
+        <h2 class="section-title">OUR <span class="text-accent-blue">ORIGIN</span></h2>
+        <div class="section-subtitle">どうしてYKCTは生まれたのか？</div>
+
+        <div class="origin-box">
+            <div class="origin-image">
+                <!-- Replace with actual coach image -->
+                <img src="https://www.ykct-tennis.com/wp-content/uploads/2023/11/img_4599-1-768x1024.jpg" alt="YKCT Origin">
+            </div>
+            <div class="origin-text">
+                <h3 style="font-size: 1.8rem; margin-bottom: 20px;">「練習でできるのに、試合で勝てない」<br>原体験からの脱却</h3>
+                <p>
+                    私自身、ジュニア時代に多彩なショットを持ちながらも「いつ・なぜそれを選ぶべきか」が分からず、試合で力を発揮できない絶望を味わいました。<br><br>
+                    <strong>単に打ち方を教えるだけでは、選手は救われない。</strong><br>
+                    だからこそ、YKCTでは「ゲームに則した戦術理解」「状況判断」「振り返り」を徹底します。その結果、初心者から育成を続けた選手たちが、<strong>沖縄県過去最多 17名・19枠の九州大会出場権</strong>を獲得。<br><br>
+                    未来を見せ、段階的に育成すれば、沖縄の選手でも必ず大きな舞台へ進めることを実績で証明しました。
+                </p>
+            </div>
+        </div>
+
+        <div class="coach-grid">
+            <!-- 1. 北見 雄治郎 -->
+            <div class="coach-card">
+                <img src="https://www.ykct-tennis.com/wp-content/uploads/2024/09/IMG_6912-768x1024.jpg" class="coach-img" alt="北見 雄治郎" style="object-position: top;">
+                <div class="coach-info">
+                    <span class="coach-role">中部校 Team Central代表</span>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 10px;">北見 雄治郎</h3>
+                    <div style="font-size: 0.95rem; line-height: 1.5; color: var(--text-main);">
+                        <strong>コーチ歴：</strong>16年<br>
+                        <strong style="display: block; margin-top: 10px;">過去の戦績：</strong>
+                        <ul class="coach-achievements">
+                            <li>2018年沖縄県一般男子オープンクラスランキング（単複1位）</li>
+                            <li>2017年第39回・2024年第46回ダンロップ杯優勝（沖縄県代表）</li>
+                            <li>2021年沖縄県テニス選手権大会（優勝）</li>
+                            <li>令和元年度 夏季テニス大会（単複優勝）</li>
+                            <li>全国新人戦団体・個人シングルス出場</li>
+                            <li>全国インターハイ団体ベスト１６・単複出場</li>
+                            <li>全国千葉国民体育大会出場（沖縄県代表）</li>
+                        </ul>
+                        <span style="color: var(--text-main); font-weight: 700; display: inline-block; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #EEE;">「ゲームに則した戦術理解」を重視。選手の可能性を簡単に諦めず、本人がまだ見えていない未来まで一緒に伴走する熱血育成者。</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 大山 凌弥 -->
+            <div class="coach-card">
+                <img src="https://www.ykct-tennis.com/wp-content/uploads/2022/06/62758426-6582-43B7-9A63-B5CF1FC26A66-scaled.jpeg" class="coach-img" alt="大山 凌弥" style="object-position: center;">
+                <div class="coach-info">
+                    <span class="coach-role">中部校 コーチ兼トレーナー</span>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 10px;">大山 凌弥</h3>
+                    <div style="font-size: 0.95rem; line-height: 1.5; color: var(--text-main);">
+                        <strong>コーチ歴：</strong>10年<br>
+                        <strong>資格・認定：</strong>NSCA認定パーソナルトレーナー / 健康運動実践指導者 / JATI認定トレーニング指導者<br>
+                        <strong style="display: block; margin-top: 10px;">過去の戦績：</strong>
+                        <ul class="coach-achievements">
+                            <li>九州ブロック専門学校体育大会（シングルス優勝）</li>
+                            <li>2017年沖縄県インターハイ（シングルス ベスト4）</li>
+                            <li>岩手国体出場（沖縄県代表）</li>
+                            <li>2024年第46回ダンロップ杯優勝（沖縄県代表）</li>
+                        </ul>
+                        <span style="color: var(--text-main); font-weight: 700; display: inline-block; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #EEE;">テニスの技術指導だけでなく、身体づくり・フィジカル面からも選手を強力にサポート。</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 大城 海 -->
+            <div class="coach-card">
+                <img src="https://www.ykct-tennis.com/wp-content/uploads/2026/07/image.png" class="coach-img" alt="大城 海" style="object-position: top;">
+                <div class="coach-info">
+                    <span class="coach-role">中部校 コーチ</span>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 10px;">大城 海</h3>
+                    <div style="font-size: 0.95rem; line-height: 1.5; color: var(--text-main);">
+                        <strong>コーチ歴：</strong>1年目<br>
+                        <strong style="display: block; margin-top: 10px;">過去の戦績：</strong>
+                        <ul class="coach-achievements">
+                            <li>令和4年度夏季ジュニア大会U16ダブルス準優勝</li>
+                            <li>令和4年度沖縄県高等学校新人体育大会団体 3位</li>
+                            <li>令和5年度沖縄県高等学校総合体育大会団体 3位</li>
+                            <li>令和5年度沖縄県高総体 個人ダブルスベスト8</li>
+                            <li>令和5年度沖縄県高等学校新人体育大会団体 3位</li>
+                            <li>令和6年度沖縄県高等学校総合体育大会団体 準優勝</li>
+                        </ul>
+                        <span style="color: var(--text-main); font-weight: 700; display: inline-block; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #EEE;">現役時代に近い目線でジュニアたちと向き合う若手ホープ。最新のプレースタイルへの理解と、選手に寄り添う親身な指導が持ち味。</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 中井 緋奈子 -->
+            <div class="coach-card">
+                <img src="https://www.ykct-tennis.com/wp-content/uploads/2026/07/S__72138761.jpg" class="coach-img" alt="中井 緋奈子" style="object-position: top;">
+                <div class="coach-info">
+                    <span class="coach-role">中部校 コーチ</span>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 10px;">中井 緋奈子</h3>
+                    <div style="font-size: 0.95rem; line-height: 1.5; color: var(--text-main);">
+                        <strong>コーチ歴：</strong>1年<br>
+                        <strong>経歴：</strong>静岡市立高校〜琉球大学<br>
+                        <strong style="display: block; margin-top: 10px;">過去の戦績：</strong>
+                        <ul class="coach-achievements">
+                            <li>第45回全国選抜高校テニス大会東海地区予選 団体4位</li>
+                            <li>第45回全国選抜高校テニス大会 団体ベスト16</li>
+                            <li>第46回全国選抜高校テニス大会東海地区予選 団体3位</li>
+                            <li>第46回全国選抜高校テニス大会 団体ベスト32</li>
+                        </ul>
+                        <span style="color: var(--text-main); font-weight: 700; display: inline-block; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #EEE;">全国の舞台を知る経験豊富な若手コーチ。大学から沖縄に拠点を移し、自身の経験をもとに選手のレベルアップを後押しします。</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7.5 VOICE (保護者の声) -->
+    <div class="ykct-voice">
+        <h2 class="section-title">VOICES</h2>
+        <div class="section-subtitle">体験から変わった！保護者の声</div>
+        
+        <div class="voice-grid">
+            <div class="voice-card">
+                <div class="voice-icon">👩</div>
+                <h4>「テニスノートを自分から書くように！」</h4>
+                <p>以前のスクールではただボールを打つだけでしたが、YKCTの体験に行ってからは「なぜミスしたか」を自分で考えるようになりました。今では言われなくてもテニスノートを書いています。<br><span style="font-size: 0.8rem; color: var(--text-light); margin-top: 10px; display: block;">（小学5年生 保護者）</span></p>
+            </div>
+            <div class="voice-card">
+                <div class="voice-icon">👨</div>
+                <h4>「挨拶や礼儀が身につきました」</h4>
+                <p>テニスの技術だけでなく、コートに入る際の挨拶やコーチへの礼儀を徹底して教えてくれます。テニスを通じて人間的にも成長しているのが分かり、預けて本当に良かったです。<br><span style="font-size: 0.8rem; color: var(--text-light); margin-top: 10px; display: block;">（中学1年生 保護者）</span></p>
+            </div>
+            <div class="voice-card">
+                <div class="voice-icon">🧑</div>
+                <h4>「具体的な目標ができたようです」</h4>
+                <p>ただ「勝ちたい」と言っていた息子が、北見コーチと話してから「九州大会に行くために今月はこれを頑張る」と具体的な目標を口にするようになりました。意識の変化に驚いています。<br><span style="font-size: 0.8rem; color: var(--text-light); margin-top: 10px; display: block;">（中学2年生 保護者）</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7.55 GALLERY (ギャラリー＆雰囲気) -->
+    <div class="ykct-gallery">
+        <h2 class="section-title">GALLERY</h2>
+        <div class="section-subtitle">熱気と笑顔があふれるコート</div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item" style="background-image: url('https://www.ykct-tennis.com/wp-content/uploads/2021/09/sports_tennis_racket_ball.png');">
+                <div class="gallery-overlay"><span>本気だから、楽しい。</span></div>
+            </div>
+            <!-- Dummy colored boxes until user provides photos -->
+            <div class="gallery-item" style="background: linear-gradient(45deg, #00d4ff, #00f0ff);">
+                <div class="gallery-overlay"><span>頭を使う「戦術」練習</span></div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(45deg, #ff007f, #ff6b00);">
+                <div class="gallery-overlay"><span>充実のトレーニング環境</span></div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(45deg, #ffeb3b, #ff9800);">
+                <div class="gallery-overlay"><span>仲間と共に高め合う</span></div>
+            </div>
+        </div>
+        <p style="text-align: center; color: var(--text-light); margin-top: 20px; font-size: 0.9rem;">※ 厳しいだけの指導はありません。挨拶や礼儀を重んじつつ、選手がのびのびとチャレンジできる雰囲気です。</p>
+    </div>
+    <!-- 7.6 TRIAL FLOW (体験レッスンの流れ) -->
+    <div class="ykct-trial-flow">
+        <h2 class="section-title">TRIAL <span style="color: var(--tropical-orange);">LESSON</span></h2>
+        <div class="section-subtitle">まずは体験へ！お申し込みの流れ</div>
+        
+        <div class="flow-container">
+            <div class="flow-step">
+                <div class="flow-num">01</div>
+                <div>
+                    <h4>公式LINEを友だち追加</h4>
+                    <p>ボタンからYKCT公式LINEを友だち追加し、「体験希望」とメッセージをお送りください。現在のレベルやご希望の曜日などを簡単にお伺いします。</p>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">02</div>
+                <div>
+                    <h4>日程調整 ＆ ヒアリング</h4>
+                    <p>担当コーチより、参加可能なクラスと日程をご案内します。ラケットをお持ちでない方は、<strong style="color: var(--neon-pink);">無料レンタル</strong>をご用意しますので「手ぶらでOK」です！</p>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">03</div>
+                <div>
+                    <h4>体験レッスン参加</h4>
+                    <p>当日は動きやすい服装でお越しください。YKCTの熱量と、頭を使う「戦術的テニス」の基礎を実際に体感していただきます。</p>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">04</div>
+                <div>
+                    <h4>フィードバック ＆ ご相談</h4>
+                    <p>レッスン終了後、コーチからお子様の「現在地」と「今後の可能性（ロードマップ）」について簡単なフィードバックをお伝えします。無理な勧誘は一切ありません。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="offer-badge">
+            <div style="font-size: 1.1rem; color: var(--tropical-yellow); margin-bottom: 5px;">＼ 迷っているなら今すぐ！ ／</div>
+            <div style="font-size: 1.4rem;">体験レッスン参加＆「手ぶらパック」実施中！</div>
+            <div style="font-size: 0.95rem; margin-top: 10px; font-weight: 700; opacity: 0.9;">ラケット・シューズがなくても大丈夫。まずはコートの熱気を体感しに来てください。</div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; position: relative; z-index: 2;">
+            <a href="https://lin.ee/9ZHTgAM" class="ykct-btn">さっそくLINEで体験を申し込む</a>
+        </div>
+    </div>
+
+    <!-- 8. FAQ -->
+    <div class="ykct-faq">
+        <h2 class="section-title">Q & <span class="text-accent-pink">A</span></h2>
+        <div class="section-subtitle">よくあるご質問</div>
+
+        <div class="faq-item">
+            <div class="faq-q">テニスは全くの初心者ですが大丈夫ですか？</div>
+            <div class="faq-a">大歓迎です！YKCTは初心者から全国を目指す選手まで、すべての段階をサポートします。ラケットの握り方から丁寧に指導し、まずは「楽しさ」と「成功体験」を積むところからスタートします。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">ただ「強くなる」ことだけが目的なのでしょうか？</div>
+            <div class="faq-a">いいえ。プロや全国を目指すことだけが正解ではありません。部活での初勝利や、仲間と楽しむことも立派な自己実現です。YKCTは、目標の大きさに関わらず、本人の決めた未来へ向かって努力する「過程」を最も評価します。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">親としてどう関われば良いか分かりません。</div>
+            <div class="faq-a">保護者の皆様は、選手の成長を支える強力なパートナーです。YKCTでは、指導の目的や成長の過程を共有し、ご家庭とスクールが一体となって子どもの成長を見守る環境づくりを大切にしています。</div>
+        </div>
+    </div>
+
+    <!-- 8.5 ACCESS (アクセス) -->
+    <div class="ykct-access">
+        <h2 class="section-title">ACCESS</h2>
+        <div class="section-subtitle">中部校 施設情報</div>
+        
+        <div class="access-container">
+            <div class="access-info">
+                <h3>YKCT Team Central（中部校）</h3>
+                <table class="access-table">
+                    <tr>
+                        <th>活動場所</th>
+                        <td>沖縄県中部エリアテニスコート（※詳細はお問い合わせください）</td>
+                    </tr>
+                    <tr>
+                        <th>駐車場</th>
+                        <td>あり（無料駐車場完備）</td>
+                    </tr>
+                    <tr>
+                        <th>対象年齢</th>
+                        <td>小学生〜高校生（初心者大歓迎）</td>
+                    </tr>
+                </table>
+                <a href="https://lin.ee/9ZHTgAM" class="ykct-btn" style="width: 100%; text-align: center; margin-top: 20px; display: block; box-sizing: border-box;">公式LINEでアクセス詳細を聞く</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. FINAL CTA -->
+    <div class="final-cta">
+        <div class="final-cta-box">
+            <h2>READY TO CHANGE?</h2>
+            <p>日常を塗り替える熱狂が、ここで待っています。<br>まずは公式LINEを追加し、あなたの目標を聞かせてください。</p>
+            <a href="https://lin.ee/9ZHTgAM" class="ykct-btn">公式LINEで今すぐ相談する</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Hero Slider Logic
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    const totalSlides = slides.length;
+    let slideInterval;
+
+    function updateSlider() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            dots[index].classList.remove('active');
+            if (index === currentSlide) {
+                slide.classList.add('active');
+                dots[index].classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlider();
+        resetInterval();
+    }
+
+    function resetInterval() {
+        if(slideInterval) clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 5000); // 5 seconds per slide
+    }
+
+    // Initialize slider
+    if(slides.length > 0) {
+        resetInterval();
+    }
+</script>
